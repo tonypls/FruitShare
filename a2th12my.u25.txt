@@ -1,0 +1,82 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   .editorconfig
+#	new file:   .gitignore
+#	new file:   app/app.ts
+#	new file:   app/pages/home/home - Copy.scss
+#	new file:   app/pages/home/home - Copy.ts
+#	new file:   app/pages/home/home.html
+#	new file:   app/pages/home/home.scss
+#	new file:   app/pages/home/home.ts
+#	new file:   app/theme/app.core.scss
+#	new file:   app/theme/app.ios.scss
+#	new file:   app/theme/app.md.scss
+#	new file:   app/theme/app.variables.scss
+#	new file:   app/theme/app.wp.scss
+#	new file:   config.xml
+#	new file:   gulpfile.js
+#	new file:   ionic.config.json
+#	new file:   package.json
+#	new file:   resources/android/icon/drawable-hdpi-icon.png
+#	new file:   resources/android/icon/drawable-ldpi-icon.png
+#	new file:   resources/android/icon/drawable-mdpi-icon.png
+#	new file:   resources/android/icon/drawable-xhdpi-icon.png
+#	new file:   resources/android/icon/drawable-xxhdpi-icon.png
+#	new file:   resources/android/icon/drawable-xxxhdpi-icon.png
+#	new file:   resources/android/splash/drawable-land-hdpi-screen.png
+#	new file:   resources/android/splash/drawable-land-ldpi-screen.png
+#	new file:   resources/android/splash/drawable-land-mdpi-screen.png
+#	new file:   resources/android/splash/drawable-land-xhdpi-screen.png
+#	new file:   resources/android/splash/drawable-land-xxhdpi-screen.png
+#	new file:   resources/android/splash/drawable-land-xxxhdpi-screen.png
+#	new file:   resources/android/splash/drawable-port-hdpi-screen.png
+#	new file:   resources/android/splash/drawable-port-ldpi-screen.png
+#	new file:   resources/android/splash/drawable-port-mdpi-screen.png
+#	new file:   resources/android/splash/drawable-port-xhdpi-screen.png
+#	new file:   resources/android/splash/drawable-port-xxhdpi-screen.png
+#	new file:   resources/android/splash/drawable-port-xxxhdpi-screen.png
+#	new file:   resources/icon.png
+#	new file:   resources/ios/icon/icon-40.png
+#	new file:   resources/ios/icon/icon-40@2x.png
+#	new file:   resources/ios/icon/icon-50.png
+#	new file:   resources/ios/icon/icon-50@2x.png
+#	new file:   resources/ios/icon/icon-60.png
+#	new file:   resources/ios/icon/icon-60@2x.png
+#	new file:   resources/ios/icon/icon-60@3x.png
+#	new file:   resources/ios/icon/icon-72.png
+#	new file:   resources/ios/icon/icon-72@2x.png
+#	new file:   resources/ios/icon/icon-76.png
+#	new file:   resources/ios/icon/icon-76@2x.png
+#	new file:   resources/ios/icon/icon-small.png
+#	new file:   resources/ios/icon/icon-small@2x.png
+#	new file:   resources/ios/icon/icon-small@3x.png
+#	new file:   resources/ios/icon/icon.png
+#	new file:   resources/ios/icon/icon@2x.png
+#	new file:   resources/ios/splash/Default-568h@2x~iphone.png
+#	new file:   resources/ios/splash/Default-667h.png
+#	new file:   resources/ios/splash/Default-736h.png
+#	new file:   resources/ios/splash/Default-Landscape-736h.png
+#	new file:   resources/ios/splash/Default-Landscape@2x~ipad.png
+#	new file:   resources/ios/splash/Default-Landscape~ipad.png
+#	new file:   resources/ios/splash/Default-Portrait@2x~ipad.png
+#	new file:   resources/ios/splash/Default-Portrait~ipad.png
+#	new file:   resources/ios/splash/Default@2x~iphone.png
+#	new file:   resources/ios/splash/Default~iphone.png
+#	new file:   resources/splash.png
+#	new file:   tsconfig.json
+#	new file:   tslint.json
+#	new file:   typings.json
+#	new file:   typings/globals/es6-shim/index.d.ts
+#	new file:   typings/globals/es6-shim/typings.json
+#	new file:   typings/index.d.ts
+#	new file:   www/index.html
+#	new file:   www/manifest.json
+#	new file:   www/service-worker.js
+#
+
