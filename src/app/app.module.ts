@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 
+// Import AngularFire
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2'
+
+// Import pages
+import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { SignupPage } from '../pages/signup/signup';
+
+// Import providers
+import { AuthData } from '../providers/auth-data';
 
 // AF2 Settings
 export const firebaseConfig = {
