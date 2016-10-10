@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-// import { Http } from '@angular/http';
-// import 'rxjs/add/operator/map';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AuthData {
+
   public fireAuth: any;
   public userProfile: any;
 

@@ -31,7 +31,10 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    ResetPasswordPage,
+    SignupPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -40,8 +43,13 @@ const myFirebaseAuthConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    ResetPasswordPage,
+    SignupPage
   ],
-  providers: []
+  providers: [
+    AuthData,
+  ]
 })
 export class AppModule {}
