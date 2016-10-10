@@ -57,8 +57,9 @@ export class LoginPage {
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
     } else {
+      console.log("Login is invalid.")
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
-        this.nav.setRoot(HomePage);
+        // this.nav.setRoot(HomePage);
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
