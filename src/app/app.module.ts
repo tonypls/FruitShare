@@ -6,10 +6,11 @@ import { MyApp } from './app.component';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2'
 
 // Import pages
-import { HomePage } from '../pages/home/home';
+import { MapPage } from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SignupPage } from '../pages/signup/signup';
+import { TreeForm } from '../pages/tree-form/tree-form';
 
 // Import providers
 import { AuthData } from '../providers/auth-data';
@@ -31,10 +32,11 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    MapPage,
     LoginPage,
     ResetPasswordPage,
-    SignupPage
+    SignupPage,
+    TreeForm
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -43,10 +45,11 @@ const myFirebaseAuthConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    MapPage,
     LoginPage,
     ResetPasswordPage,
-    SignupPage
+    SignupPage,
+    TreeForm
   ],
   providers: [
     AuthData,

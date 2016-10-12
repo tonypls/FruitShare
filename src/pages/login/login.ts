@@ -1,12 +1,9 @@
-import {
-  NavController,
-  LoadingController,
-  AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 import { SignupPage } from '../signup/signup';
-import { HomePage } from '../home/home';
+import { MapPage } from '../map/map';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 import { EmailValidator } from '../../app/validators/email';
 
@@ -59,7 +56,7 @@ export class LoginPage {
     } else {
       console.log("Login is invalid.")
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
-        // this.nav.setRoot(HomePage);
+         this.nav.setRoot(MapPage);
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
