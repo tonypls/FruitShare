@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { Geoposition, GeolocationOptions } from 'ionic-native/dist/plugins/geolocation';
 import { ModalController, ViewController } from 'ionic-angular';
@@ -16,11 +16,11 @@ export class MapPage {
   map: any;
   marker: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.marker = navParams.get('marker');
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+
   }
 
-  ionViewLoaded() {
+  ionViewDidLoad() {
     this.loadMap();
   }
 
@@ -44,25 +44,24 @@ export class MapPage {
   }
 
   addMarker(){
-      this.navCtrl.push(TreeForm, {map: this.map, callback: this.getTreePost});
-      this.addInfoWindow(this.marker, 'tree');
- }
 
- getTreePost = function(_params) {
-     return new Promise((resolve, reject) => {
-             this.marker = _params;
-             resolve();
-         });
- }
+    let treeModal = this.modalCtrl.create(TreeForm, {"map" : this.map});
+    treeModal.present();
 
- addInfoWindow(marker, content){
-  let infoWindow = new google.maps.InfoWindow({
-    content: content
-  });
+    treeModal.onDidDismiss(data => {
+      console.log('MODAL DATA', data);
+      this.addInfoWindow(data, 'tree');
+    });
+  }
 
-  google.maps.event.addListener(marker, 'click', () => {
-    infoWindow.open(this.map, marker);
-  });
+  addInfoWindow(marker, content){
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
   }
 
 }

@@ -1,37 +1,43 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { MapPage } from '../map/map';
+import { NavController, ViewController, NavParams } from 'ionic-angular';
 
-declare var google;
+/*
+  Generated class for the TreeForm page.
 
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
-  templateUrl: 'tree-form.html',
+  selector: 'page-tree-form',
+  templateUrl: 'tree-form.html'
 })
+//class for Tree Modal to query user for name and description for tree post
 export class TreeForm {
-  map: any;
-  callback: any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.map = navParams.get('map');
-    this.callback = navParams.get('callback');
+  constructor(public viewCtrl: ViewController, public params: NavParams) {
   }
 
-
+  //dismisses the modal when cancel button is pressed
   cancel() {
-    this.navCtrl.pop(MapPage);
+    this.viewCtrl.dismiss();
   }
 
+  //creates a marker which is passed back to the map class
   addTree() {
+    var fruitIcon = {
+      url: 'http://www.freeiconspng.com/uploads/clean-energy-tree-icon-copy-9.png', // url
+      scaledSize: new google.maps.Size(50, 50), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0, 0) // anchor
+    };
+
     let marker = new google.maps.Marker({
-      map: this.map.get("map"),
+      map: this.params.get("map"),
+      icon: fruitIcon,
       animation: google.maps.Animation.DROP,
-      position: this.map.get("map").getCenter()
+      position: this.params.get("map").getCenter()
     });
 
-    this.navCtrl.pop();
-    /*this.callback(marker).then(()=>{
-      this.navCtrl.pop();
-    });*/
+    this.viewCtrl.dismiss(marker);
   }
 
 }
