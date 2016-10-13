@@ -1,8 +1,9 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { Geoposition, GeolocationOptions } from 'ionic-native/dist/plugins/geolocation';
-import { ModalController, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, ViewController } from 'ionic-angular';
+import { TreeForm } from '../tree-form/tree-form';
 
 declare var google;
 
@@ -13,9 +14,10 @@ export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  marker: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public viewCtrl: ViewController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.marker = navParams.get('marker');
   }
 
   ionViewLoaded() {
@@ -42,15 +44,15 @@ export class MapPage {
   }
 
   addMarker(){
+      this.navCtrl.push(TreeForm, {map: this.map, callback: this.getTreePost});
+      this.addInfoWindow(this.marker, 'tree');
+ }
 
-    let treeModal = this.modalCtrl.create(TreeForm, {"map" : this.map});
-    treeModal.present();
-
-    treeModal.onDidDismiss(data => {
-      console.log('MODAL DATA', data);
-      this.addInfoWindow(data, 'tree');
-    });
-
+ getTreePost = function(_params) {
+     return new Promise((resolve, reject) => {
+             this.marker = _params;
+             resolve();
+         });
  }
 
  addInfoWindow(marker, content){
@@ -61,31 +63,6 @@ export class MapPage {
   google.maps.event.addListener(marker, 'click', () => {
     infoWindow.open(this.map, marker);
   });
-  }
-
-}
-
-@Component({
-  templateUrl: 'build/pages/tree-form/tree-form.html'
-})
-export class TreeForm {
-  constructor(public params: NavParams, public viewCtrl: ViewController) {
-  }
-
-  cancel() {
-    this.viewCtrl.dismiss();
-  }
-
-  addTree() {
-    let marker = new google.maps.Marker({
-    map: this.params.get("map"),
-    animation: google.maps.Animation.DROP,
-    position: this.params.get("map").getCenter()
-    });
-
-    let content = 'Tree';
-
-    this.viewCtrl.dismiss(marker);
   }
 
 }
