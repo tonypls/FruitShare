@@ -12,24 +12,22 @@
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list>
+  <form [formGroup]="treePostForm" (submit)="addTree()" (cancel)="cancel()" novalidate>
+    <ion-item>
+      <ion-label floating>Tree Name</ion-label>
+      <ion-input #email formControlName="treeName"
+        placeholder="" type="text" name="treeName"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Tree Name</ion-label>
-    <ion-input type="text" name="treeName"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input #email formControlName="treeDescription" placeholder="" class="description-input" type="text" name=treeDescription></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Description</ion-label>
-    <ion-input class="description-input" type="text" name=treeDescription></ion-input>
-  </ion-item>
-
-  <ion-row padding>
-    <button class="cancel" (click)="cancel()" >Cancel</button>
-    <button class="add-tree" (click)="addTree()" >Add Tree</button>
-  </ion-row>
-
-</ion-list>
+    <ion-row padding>
+      <button class="cancel" (click)="cancel()" >Cancel</button>
+      <button class="add-tree" type="submit" >Add Tree</button>
+    </ion-row>
+  </form>
 </ion-content>
