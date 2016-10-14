@@ -28,7 +28,7 @@
     "@types/request": "0.0.30",
     "typescript": "^2.0.3"
   },
-  "description": "plsplspls: An Ionic project",
+  "description": "Fruit Share!: An Ionic project",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",

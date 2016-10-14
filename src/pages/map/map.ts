@@ -1,7 +1,7 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
-import { Geoposition, GeolocationOptions } from 'ionic-native/dist/plugins/geolocation';
+import { Geoposition, GeolocationOptions } from 'ionic-native';
 import { ModalController, ViewController } from 'ionic-angular';
 import { TreeForm } from '../tree-form/tree-form';
 
