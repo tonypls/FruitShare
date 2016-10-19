@@ -11,7 +11,7 @@ import { AngularFire } from 'angularfire2';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage = MapPage;
 
   constructor(platform: Platform, af: AngularFire) {
 

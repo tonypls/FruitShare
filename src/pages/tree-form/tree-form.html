@@ -12,6 +12,7 @@
 
 </ion-header>
 
+
 <ion-content padding>
   <form [formGroup]="treePostForm" (submit)="addTree()" (cancel)="cancel()" novalidate>
     <ion-item>
@@ -29,5 +30,18 @@
       <button class="cancel" (click)="cancel()" >Cancel</button>
       <button class="add-tree" type="submit" >Add Tree</button>
     </ion-row>
+
+    <ion-item>
+      <ion-label>Fruit Type</ion-label>
+      <ion-select [(ngModel)]="fruitType">
+        <ion-option value="apple">Apple</ion-option>
+        <ion-option value="banana">Banana</ion-option>
+        <ion-option value="orange">Orange</ion-option>
+        <ion-option value="pear">Pear</ion-option>
+        <ion-option value="raspberry">Raspberry</ion-option>
+        <ion-option value="other">Other</ion-option>
+      </ion-select>
+    </ion-item>
+
   </form>
 </ion-content>

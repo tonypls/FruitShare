@@ -1,25 +1,27 @@
 .tree-form {
+}
 
-  ion-item {
-    height: 800%;
-    width: 200%;
-    align-items: center;
-  }
+ion-item {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
 
-  ion-input {
-    height: 800%;
-    width: 200%;
-  }
+.description-input {
+  height: 100px;
+  width: 100%;
+}
 
-  ion-row {
-    align-items: center;
-    text-align: center;
-  }
+ion-row {
+  align-items: center;
+  text-align: center;
+}
 
-  .cancel {
-    width: 50%;
-  }
-  .add-tree {
-    width: 50%;
-  }
+.cancel {
+  height: 30px;
+  width: 45%;
+}
+.add-tree {
+  height: 30px;
+  width: 45%;
 }
