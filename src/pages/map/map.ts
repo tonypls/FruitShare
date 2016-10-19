@@ -66,7 +66,7 @@ export class MapPage {
 
 }
 /*
-This is the javascript code that needs to be integrated for the chat feature - Tony
+This is the javascript code that needs to be integrated for the chat feature - Tony xD
 import {Page} from 'ionic/ionic';
 import {Http} from "angular2/http";
 import {NgZone} from "angular2/core";
