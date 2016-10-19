@@ -3,8 +3,8 @@
 # FruitShare
 Fruit Share! Ionic App
 
-** Karanjit - Yo guys for some reason the files I get from this repo don't work for me even though they are the same as the ones in the other repo.
-If you have the same issue, use this repo: https://github.com/KaranjitGahunia/IonicFirebase
+** Karanjit - Standard NPM install may not work when cloning this repo. The node_modules folder isn't generated correctly by NPM. 
+Instead, use this link to get a zipped version of the node_modules folder: https://drive.google.com/open?id=0BwFjAjomrfG_VEN4MWwyR293WHc
 
 ## Install & Start
 
