@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SignupPage } from '../pages/signup/signup';
 import { TreeForm } from '../pages/tree-form/tree-form';
+import { TreePost } from '../pages/tree-post/tree-post';
 
 // Import providers
 import { AuthData } from '../providers/auth-data';
@@ -36,7 +37,8 @@ const myFirebaseAuthConfig = {
     LoginPage,
     ResetPasswordPage,
     SignupPage,
-    TreeForm
+    TreeForm,
+    TreePost
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -49,7 +51,8 @@ const myFirebaseAuthConfig = {
     LoginPage,
     ResetPasswordPage,
     SignupPage,
-    TreeForm
+    TreeForm,
+    TreePost
   ],
   providers: [
     AuthData,

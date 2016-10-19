@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { ModalController } from 'ionic-angular';
 import { TreeForm } from '../tree-form/tree-form';
+import { TreePost } from '../tree-post/tree-post';
 
 declare var google;
 
@@ -37,9 +38,7 @@ export class MapPage {
         center: {lat: -40, lng: 174},
         zoom: 6
       });
-
     });
-
   }
 
   centerOnLocation() {
@@ -49,6 +48,20 @@ export class MapPage {
 
     }).catch(err => {
       console.log(err);
+    });
+  }
+
+  geocode(locationInput) {
+    var geocoder = new google.maps.Geocoder();
+    var map = this.map;
+    geocoder.geocode({'address': locationInput}, function(results, status) {
+      if (status === 'OK') {
+        var latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+        map.setCenter(latlng);
+        map.setZoom(10);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
     });
   }
 
@@ -69,7 +82,8 @@ export class MapPage {
     });
 
     google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
+      //infoWindow.open(this.map, marker);
+      this.navCtrl.push(TreePost);
     });
   }
   /*

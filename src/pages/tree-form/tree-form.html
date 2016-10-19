@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <form [formGroup]="treePostForm" (submit)="addTree()" (cancel)="cancel()" novalidate>
     <ion-item>
@@ -21,27 +20,39 @@
         placeholder="" type="text" name="treeName"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label floating>Description</ion-label>
+    <ion-item padding>
+      <ion-label class="desciption-label" floating>Description</ion-label>
       <ion-input #email formControlName="treeDescription" placeholder="" class="description-input" type="text" name=treeDescription></ion-input>
+    </ion-item>
+
+    <ion-item padding>
+      <ion-label>Fruit Type</ion-label>
+      <ion-select #newSelect formControlName="FruitType" (change)="onFruitTypeSelect(FruitType)">
+        <ion-option checked="true" value="apple">Apple</ion-option>
+        <ion-option value="apricot">Apricot</ion-option>
+        <ion-option value="banana">Banana</ion-option>
+        <ion-option value="blackberry">Blackberry</ion-option>
+        <ion-option value="cherry">Cherry</ion-option>
+        <ion-option value="feijoa">Feijoa</ion-option>
+        <ion-option value="grape">Grape</ion-option>
+        <ion-option value="kiwifruit">Kiwifruit</ion-option>
+        <ion-option value="lemon">Lemon</ion-option>
+        <ion-option value="orange">Orange</ion-option>
+        <ion-option value="mango">Mango</ion-option>
+        <ion-option value="melon">Melon</ion-option>
+        <ion-option value="pear">Pear</ion-option>
+        <ion-option value="plum">Plum</ion-option>
+        <ion-option value="pineapple">Pineapple</ion-option>
+        <ion-option value="raspberry">Raspberry</ion-option>
+        <ion-option value="strawberry">Strawberry</ion-option>
+        <ion-option value="other">Other</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-row padding>
       <button class="cancel" (click)="cancel()" >Cancel</button>
       <button class="add-tree" type="submit" >Add Tree</button>
     </ion-row>
-
-    <ion-item>
-      <ion-label>Fruit Type</ion-label>
-      <ion-select >
-        <ion-option value="apple">Apple</ion-option>
-        <ion-option value="banana">Banana</ion-option>
-        <ion-option value="orange">Orange</ion-option>
-        <ion-option value="pear">Pear</ion-option>
-        <ion-option value="raspberry">Raspberry</ion-option>
-        <ion-option value="other">Other</ion-option>
-      </ion-select>
-    </ion-item>
 
   </form>
 </ion-content>

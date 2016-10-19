@@ -20,7 +20,8 @@ export class TreeForm {
   constructor(public viewCtrl: ViewController, public params: NavParams, public formBuilder: FormBuilder) {
     this.treePostForm = formBuilder.group({
       treeName: ['', Validators.compose([Validators.required])],
-      treeDescription: ['', Validators.compose([Validators.required])]
+      treeDescription: ['', Validators.compose([Validators.required])],
+      FruitType: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -36,6 +37,7 @@ export class TreeForm {
     } else {
       var name = this.treePostForm.value.treeName;
       var description = this.treePostForm.value.treeDescription;
+      var fruitType = this.treePostForm.value.FruitType;
 
       var fruitIcon = {
         url: 'http://www.freeiconspng.com/uploads/clean-energy-tree-icon-copy-9.png', // url
@@ -51,8 +53,7 @@ export class TreeForm {
         position: this.params.get("map").getCenter()
       });
 
-      alert(name);
-      alert(description);
+      alert('TEST- Name: ' + name +' Description: '+ description + ' Fruit Type: ' + fruitType);
 
       this.viewCtrl.dismiss(marker);
 
