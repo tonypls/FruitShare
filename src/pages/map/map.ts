@@ -32,14 +32,21 @@ export class MapPage {
         center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
         zoom: 15
       });
+
+      this.map.controls[google.maps.ControlPosition.TOP_LEFT].push('pac-input');
+
     }).catch(err => {
       console.log(err);
       this.map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -40, lng: 174},
         zoom: 6
       });
-    });
+      this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('pac-input'));
+
+   });
   }
+
+
 
   centerOnLocation() {
     var map = this.map;
@@ -59,7 +66,7 @@ export class MapPage {
       if (status === 'OK') {
         var latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
         map.setCenter(latlng);
-        map.setZoom(10);
+        map.setZoom(8);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
@@ -78,9 +85,9 @@ export class MapPage {
   }
 
   addInfoWindow(marker, content){
-    let infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
+    //let infoWindow = new google.maps.InfoWindow({
+      //content: content
+    //});
 
     google.maps.event.addListener(marker, 'click', () => {
       //infoWindow.open(this.map, marker);

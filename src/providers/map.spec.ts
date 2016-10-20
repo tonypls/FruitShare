@@ -1,4 +1,4 @@
-import {beforeEachProviders, it, describe, expect, inject} from '@angular/core/testing';
+import {it, describe, expect} from '@angular/core/testing';
 import {MapPage} from '../pages/map/map';
 
 describe ('Map Service', () => {

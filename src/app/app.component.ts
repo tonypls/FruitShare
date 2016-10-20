@@ -6,6 +6,7 @@ import { MapPage } from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import firebase from 'firebase';
 import { AngularFire } from 'angularfire2';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -13,7 +14,7 @@ import { AngularFire } from 'angularfire2';
 export class MyApp {
   rootPage;
 
-  constructor(platform: Platform, af: AngularFire) {
+  constructor(platform: Platform, af: AngularFire, public loadingCtrl: LoadingController) {
 
     platform.ready().then(() => {
       StatusBar.styleDefault();
@@ -32,6 +33,13 @@ export class MyApp {
    firebase.auth().onAuthStateChanged((user) => {
      if (user) {
        this.rootPage = MapPage;
+
+		let loader = this.loadingCtrl.create({
+			content: "Logging in....",
+			duration: 500
+		});
+		loader.present();
+
        console.log("User is logged in. Direct to MapPage");
      } else {
        this.rootPage = LoginPage;
