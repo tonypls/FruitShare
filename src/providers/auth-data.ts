@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import firebase from 'firebase';
 
 @Injectable()
 export class AuthData {
@@ -15,10 +16,10 @@ export class AuthData {
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
 
-  signupUser(email: string, password: string): any {
+  signupUser(email: string, displayName: string, password: string): any {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((newUser) => {
-        this.userProfile.child(newUser.uid).set({email: email});
+        this.userProfile.child(newUser.uid).set({email: email, displayName: displayName});
       });
   }
 
@@ -28,5 +29,11 @@ export class AuthData {
 
   logoutUser(): any {
     return this.fireAuth.signOut();
+  }
+
+  pushTreetoDB(name: string, description: string, fruitType: string, position: any){
+    var latitude = position.lat();
+    var longitude = position.lng();
+    firebase.database().ref('/trees').push({name: name, description: description, fruitType: fruitType, latitude: latitude, longitude: longitude});
   }
 }

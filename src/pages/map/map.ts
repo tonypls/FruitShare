@@ -42,6 +42,7 @@ export class MapPage {
   }
 
   centerOnLocation() {
+    var map = this.map;
     Geolocation.getCurrentPosition().then(pos => {
       let currentLocation = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
       map.setCenter(currentLocation);

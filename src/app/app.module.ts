@@ -17,6 +17,7 @@ import { TreePost } from '../pages/tree-post/tree-post';
 import { AuthData } from '../providers/auth-data';
 
 // AF2 Settings
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCddCnyk5LBaBQtvkslgmvMLVYL_46HwWQ",
   authDomain: "fruit-share-1474847572914.firebaseapp.com",

@@ -22,6 +22,7 @@ export class SignupPage {
 
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      displayName: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     })
   }
@@ -46,7 +47,7 @@ export class SignupPage {
     if (!this.signupForm.valid){
       console.log(this.signupForm.value);
     } else {
-      this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
+      this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.displayName, this.signupForm.value.password).then(() => {
          this.nav.setRoot(MapPage);
       }, (error) => {
         this.loading.dismiss();

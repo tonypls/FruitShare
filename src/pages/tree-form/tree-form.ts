@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { AuthData } from '../../providers/auth-data';
 
 /*
   Generated class for the TreeForm page.
@@ -17,7 +17,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class TreeForm {
   public treePostForm;
 
-  constructor(public viewCtrl: ViewController, public params: NavParams, public formBuilder: FormBuilder) {
+  constructor(public viewCtrl: ViewController, public params: NavParams, public formBuilder: FormBuilder, public authData: AuthData) {
     this.treePostForm = formBuilder.group({
       treeName: ['', Validators.compose([Validators.required])],
       treeDescription: ['', Validators.compose([Validators.required])],
@@ -38,6 +38,7 @@ export class TreeForm {
       var name = this.treePostForm.value.treeName;
       var description = this.treePostForm.value.treeDescription;
       var fruitType = this.treePostForm.value.FruitType;
+      var position = this.params.get("map").getCenter();
 
       var fruitIcon = {
         url: 'http://www.freeiconspng.com/uploads/clean-energy-tree-icon-copy-9.png', // url
@@ -46,19 +47,18 @@ export class TreeForm {
         anchor: new google.maps.Point(0, 0) // anchor
       };
 
+
       let marker = new google.maps.Marker({
         map: this.params.get("map"),
         icon: fruitIcon,
         animation: google.maps.Animation.DROP,
-        position: this.params.get("map").getCenter()
+        position: position
       });
 
+      this.authData.pushTreetoDB(name, description, fruitType, position);
       alert('TEST- Name: ' + name +' Description: '+ description + ' Fruit Type: ' + fruitType);
 
       this.viewCtrl.dismiss(marker);
-
     }
-
   }
-
 }
