@@ -1,3 +1,4 @@
+//    import all modules
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
@@ -27,6 +28,7 @@ export class MapPage {
 
   loadMap(){
 
+//    Get user's current location
     Geolocation.getCurrentPosition().then(pos => {
       this.map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
@@ -47,7 +49,7 @@ export class MapPage {
   }
 
 
-
+//   Centralising the current location
   centerOnLocation() {
     var map = this.map;
     Geolocation.getCurrentPosition().then(pos => {
@@ -59,6 +61,7 @@ export class MapPage {
     });
   }
 
+//    Geocode converts address or landscape names to latitude and longitude
   geocode(locationInput) {
     var geocoder = new google.maps.Geocoder();
     var map = this.map;
@@ -73,8 +76,8 @@ export class MapPage {
     });
   }
 
+//    Add a maker to the map
   addMarker(){
-
     let treeModal = this.modalCtrl.create(TreeForm, {"map" : this.map});
     treeModal.present();
 
