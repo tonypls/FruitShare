@@ -10,6 +10,7 @@ export class FirebaseDB {
     this.database = firebase.database();
   }
 
+//    Save new tree to DB
   pushTreetoDB(name: string, description: string, fruitType: string, position: any){
     var latitude = position.lat();
     var longitude = position.lng();
