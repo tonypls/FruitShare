@@ -1,3 +1,4 @@
+//    This root component needs to import everything required for app.
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
@@ -8,6 +9,7 @@ import firebase from 'firebase';
 import { AngularFire } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
 
+//    Connect the root component model with a view and initialise a class.
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
@@ -19,7 +21,7 @@ export class MyApp {
     platform.ready().then(() => {
       StatusBar.styleDefault();
     });
-
+//    Initilising Firebase
     firebase.initializeApp({
       apiKey: "AIzaSyCddCnyk5LBaBQtvkslgmvMLVYL_46HwWQ",
       authDomain: "fruit-share-1474847572914.firebaseapp.com",
