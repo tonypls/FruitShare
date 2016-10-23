@@ -1,3 +1,5 @@
+//This validates email addresses whether they are valid or not
+
 import {Control} from '@angular/common';
 
 export class EmailValidator {
