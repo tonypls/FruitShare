@@ -1,3 +1,4 @@
+//    Import all modules
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -41,6 +42,8 @@ export class SignupPage {
    *
    * If the form is invalid it will just log the form value, feel free to handle that as you like.
    */
+
+//    Create new user if user enters valid values. Passwors must be more than 6 characters
   signupUser(){
     this.submitAttempt = true;
 
