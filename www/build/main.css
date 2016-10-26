@@ -21126,6 +21126,10 @@ page-login .error-message .item-inner {
   height: 100%;
 }
 
+.controls {
+  width: 80%;
+}
+
 page-signup form {
   margin-bottom: 32px;
 }
@@ -21155,34 +21159,12 @@ page-signup .error-message .item-inner {
   border-bottom: 0 !important;
 }
 
-ion-item {
-  height: 100%;
-  width: 100%;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  -ms-grid-row-align: center;
-  align-items: center;
-}
-
-.description-input {
-  height: 100px;
-  width: 100%;
-}
-
-ion-row {
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  -ms-grid-row-align: center;
-  align-items: center;
-  text-align: center;
-}
-
 .cancel {
-  height: 30px;
-  width: 45%;
+  width: 50%;
+  height: 20px;
 }
 
 .add-tree {
-  height: 30px;
-  width: 45%;
+  width: 50%;
+  height: 20px;
 }

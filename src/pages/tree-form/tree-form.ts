@@ -9,10 +9,14 @@ import { AuthData } from '../../providers/auth-data';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+var google;
+
 @Component({
   selector: 'page-tree-form',
   templateUrl: 'tree-form.html'
 })
+
+
 //class for Tree Modal to query user for name and description for tree post
 export class TreeForm {
   public treePostForm;

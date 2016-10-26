@@ -14,7 +14,7 @@ import { LoadingController } from 'ionic-angular';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage;
+  rootPage = LoginPage;
 
   constructor(platform: Platform, af: AngularFire, public loadingCtrl: LoadingController) {
 
@@ -32,22 +32,22 @@ export class MyApp {
 
 //    Code to direct to login page if user isnt logged in
 //    and direct to map page if user is logged in.
-   firebase.auth().onAuthStateChanged((user) => {
-     if (user) {
-       this.rootPage = MapPage;
-
-		let loader = this.loadingCtrl.create({
-			content: "Logging in....",
-			duration: 500
-		});
-		loader.present();
-
-       console.log("User is logged in. Direct to MapPage");
-     } else {
-       this.rootPage = LoginPage;
-       console.log("User isn't logged in. Direct to LoginPage");
-     }
-   });
+  //  firebase.auth().onAuthStateChanged((user) => {
+  //    if (user) {
+  //      this.rootPage = MapPage;
+   //
+	// 	let loader = this.loadingCtrl.create({
+	// 		content: "Logging in....",
+	// 		duration: 500
+	// 	});
+	// 	loader.present();
+   //
+  //      console.log("User is logged in. Direct to MapPage");
+  //    } else {
+  //      this.rootPage = LoginPage;
+  //      console.log("User isn't logged in. Direct to LoginPage");
+  //    }
+  //  });
 
   }
 }

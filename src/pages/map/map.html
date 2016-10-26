@@ -1,14 +1,13 @@
 
 <ion-content>
-
   <ion-searchbar id="pac-input" class="controls" [(ngModel)]="locationInput" (search)="geocode(locationInput)" placeholder="Search location"></ion-searchbar>
-  <div #map id="map"> </div>
+  <div #map id="map"></div>
 
   <ion-fab left bottom>
       <button ion-fab color="light"><ion-icon name="md-list"></ion-icon></button>
       <ion-fab-list side="top">
-        <button ion-fab><ion-icon name="md-log-out"></ion-icon></button>
-        <button ion-fab><ion-icon name="md-person"></ion-icon></button>
+        <button ion-fab (click)="logout()"><ion-icon name="md-log-out"></ion-icon></button>
+        <button ion-fab (click)="pullTreesFromDB()"><ion-icon name="md-refresh"></ion-icon></button>
         <button ion-fab (click)="centerOnLocation()"><ion-icon name="md-locate"></ion-icon></button>
         <button ion-fab (click)="addMarker()"><ion-icon name="md-add"></ion-icon></button>
       </ion-fab-list>

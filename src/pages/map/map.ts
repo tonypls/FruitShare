@@ -3,8 +3,12 @@ import {Component, ViewChild, ElementRef} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { ModalController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 import { TreeForm } from '../tree-form/tree-form';
 import { TreePost } from '../tree-post/tree-post';
+import { AuthData } from '../../providers/auth-data';
+import { LoadingController } from 'ionic-angular';
+import firebase from 'firebase';
 
 declare var google;
 
@@ -17,7 +21,7 @@ export class MapPage {
   map: any;
   marker: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public authData: AuthData, public loadingCtrl: LoadingController) {
 
   }
 
@@ -27,8 +31,7 @@ export class MapPage {
 
 
   loadMap(){
-
-//    Get user's current location
+    //    Get user's current location
     Geolocation.getCurrentPosition().then(pos => {
       this.map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
@@ -44,24 +47,22 @@ export class MapPage {
         zoom: 6
       });
       this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('pac-input'));
-
-   });
+    });
   }
 
-
-//   Centralising the current location
+  //   Centralising the current location
   centerOnLocation() {
     var map = this.map;
     Geolocation.getCurrentPosition().then(pos => {
       let currentLocation = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
       map.setCenter(currentLocation);
-
+      map.setZoom(15);
     }).catch(err => {
       console.log(err);
     });
   }
 
-//    Geocode converts address or landscape names to latitude and longitude
+  //    Geocode converts address or landscape names to latitude and longitude
   geocode(locationInput) {
     var geocoder = new google.maps.Geocoder();
     var map = this.map;
@@ -69,14 +70,14 @@ export class MapPage {
       if (status === 'OK') {
         var latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
         map.setCenter(latlng);
-        map.setZoom(8);
+        map.setZoom(15);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
   }
 
-//    Add a maker to the map
+  //    Add a maker to the map
   addMarker(){
     let treeModal = this.modalCtrl.create(TreeForm, {"map" : this.map});
     treeModal.present();
@@ -89,7 +90,7 @@ export class MapPage {
 
   addInfoWindow(marker, content){
     //let infoWindow = new google.maps.InfoWindow({
-      //content: content
+    //content: content
     //});
 
     google.maps.event.addListener(marker, 'click', () => {
@@ -97,44 +98,82 @@ export class MapPage {
       this.navCtrl.push(TreePost);
     });
   }
+
+  pullTreesFromDB(){
+    let loader = this.loadingCtrl.create({
+      content: "Syncing data",
+      duration: 500
+    });
+    loader.present();
+    console.log('Pulling trees from db');
+    var trees = firebase.database().ref('/trees').orderByKey();
+    var fruitIcon = {
+      url: 'http://www.freeiconspng.com/uploads/clean-energy-tree-icon-copy-9.png', // url
+      scaledSize: new google.maps.Size(50, 50), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0, 0) // anchor
+    };
+    var map = this.map;
+    trees.once('value').then((dataSnapshot) => {
+      dataSnapshot.forEach(function (childSnapshot) {
+        var name  = childSnapshot.val().name;
+        var description = childSnapshot.val().description;
+        var fruitType = childSnapshot.val().fruitType;
+        var myLatLng = {lat: childSnapshot.val().latitude, lng: childSnapshot.val().longitude};
+        console.log('Name: ' + name + ', description: ' + description);
+        let marker = new google.maps.Marker({
+          map: map,
+          icon: fruitIcon,
+          animation: google.maps.Animation.DROP,
+          position: myLatLng
+        });
+      })
+    })
+  }
+
+  logout(){
+    // this.authData.logoutUser();
+    // this.navCtrl.setRoot(LoginPage);
+  }
+
   /*
-   This is the javascript code that needs to be integrated for the chat feature - Tony xD
-   import {Page} from 'ionic/ionic';
-   import {Http} from "angular2/http";
-   import {NgZone} from "angular2/core";
+  This is the javascript code that needs to be integrated for the chat feature - Tony xD
+  import {Page} from 'ionic/ionic';
+  import {Http} from "angular2/http";
+  import {NgZone} from "angular2/core";
 
-   @Page({
-       templateUrl: 'build/pages/home/home.html',
-   })
+  @Page({
+  templateUrl: 'build/pages/home/home.html',
+})
 
-   export class HomePage {
-       constructor(http: Http) {
-           this.messages = [];
-           this.socketHost = "http://192.168.57.1:3000";
-           this.zone = new NgZone({enableLongStackTrace: false});
-           http.get(this.socketHost + "/fetch").subscribe((success) => {
-               var data = success.json();
-               for(var i = 0; i < data.length; i++) {
-                   this.messages.push(data[i].message);
-               }
-           }, (error) => {
-               console.log(JSON.stringify(error));
-           });
-           this.chatBox = "";
-           this.socket = io(this.socketHost);
-           this.socket.on("chat_message", (msg) => {
-               this.zone.run(() => {
-                   this.messages.push(msg);
-               });
-           });
-       }
+export class HomePage {
+constructor(http: Http) {
+this.messages = [];
+this.socketHost = "http://192.168.57.1:3000";
+this.zone = new NgZone({enableLongStackTrace: false});
+http.get(this.socketHost + "/fetch").subscribe((success) => {
+var data = success.json();
+for(var i = 0; i < data.length; i++) {
+this.messages.push(data[i].message);
+}
+}, (error) => {
+console.log(JSON.stringify(error));
+});
+this.chatBox = "";
+this.socket = io(this.socketHost);
+this.socket.on("chat_message", (msg) => {
+this.zone.run(() => {
+this.messages.push(msg);
+});
+});
+}
 
-       send(message) {
-           if(message && message != "") {
-               this.socket.emit("chat_message", message);
-           }
-           this.chatBox = "";
-       }
-   } */
+send(message) {
+if(message && message != "") {
+this.socket.emit("chat_message", message);
+}
+this.chatBox = "";
+}
+} */
 
 }

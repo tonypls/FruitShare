@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import firebase from 'firebase';
+
 
 @Injectable()
 export class AuthData {
@@ -40,4 +40,16 @@ export class AuthData {
     var longitude = position.lng();
     firebase.database().ref('/trees').push({name: name, description: description, fruitType: fruitType, latitude: latitude, longitude: longitude});
   }
+
+  // pullTreesFromDB(){
+  //   console.log('Pulling trees from db');
+  //   var trees = firebase.database().ref('/trees').orderByKey();
+  //   trees.once('value').then((dataSnapshot) => {
+  //     dataSnapshot.forEach(function (childSnapshot) {
+  //       var name  = childSnapshot.val().name;
+  //       console.log('Tree name: ' + name);
+  //     })
+  //   })
+  // }
+
 }
