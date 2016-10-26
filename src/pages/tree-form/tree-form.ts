@@ -9,7 +9,8 @@ import { AuthData } from '../../providers/auth-data';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-var google;
+
+declare var google;
 
 @Component({
   selector: 'page-tree-form',
@@ -60,7 +61,6 @@ export class TreeForm {
       });
 
       this.authData.pushTreetoDB(name, description, fruitType, position);
-      alert('TEST- Name: ' + name +' Description: '+ description + ' Fruit Type: ' + fruitType);
 
       this.viewCtrl.dismiss(marker);
     }

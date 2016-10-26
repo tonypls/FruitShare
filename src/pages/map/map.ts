@@ -19,7 +19,7 @@ export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  marker: any;
+  markers: any = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public authData: AuthData, public loadingCtrl: LoadingController) {
 
@@ -40,6 +40,7 @@ export class MapPage {
 
       this.map.controls[google.maps.ControlPosition.TOP_LEFT].push('pac-input');
 
+      this.pullTreesFromDB();
     }).catch(err => {
       console.log(err);
       this.map = new google.maps.Map(document.getElementById('map'), {
@@ -47,6 +48,8 @@ export class MapPage {
         zoom: 6
       });
       this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('pac-input'));
+
+      this.pullTreesFromDB();
     });
   }
 
@@ -84,18 +87,22 @@ export class MapPage {
 
     treeModal.onDidDismiss(data => {
       console.log('MODAL DATA', data);
-      this.addInfoWindow(data, 'tree');
+      this.markers.push(data);
+      if (data != null) {
+        this.pullTreesFromDB();
+      }
     });
   }
 
   addInfoWindow(marker, content){
-    //let infoWindow = new google.maps.InfoWindow({
-    //content: content
-    //});
+    let infoWindow = new google.maps.InfoWindow({
+    content: content
+    });
 
     google.maps.event.addListener(marker, 'click', () => {
-      //infoWindow.open(this.map, marker);
-      this.navCtrl.push(TreePost);
+      infoWindow.open(this.map, marker);
+
+      //this.navCtrl.push(TreePost);
     });
   }
 
@@ -113,27 +120,54 @@ export class MapPage {
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(0, 0) // anchor
     };
+
     var map = this.map;
+    this.clearMarkers();
+    var markerArray = this.markers;
+
     trees.once('value').then((dataSnapshot) => {
       dataSnapshot.forEach(function (childSnapshot) {
         var name  = childSnapshot.val().name;
         var description = childSnapshot.val().description;
         var fruitType = childSnapshot.val().fruitType;
         var myLatLng = {lat: childSnapshot.val().latitude, lng: childSnapshot.val().longitude};
-        console.log('Name: ' + name + ', description: ' + description);
+
+        var content = 'Name: ' + name + ', Description: ' + description + ', Fruit Type: ' + fruitType;
+
+        console.log(content);
         let marker = new google.maps.Marker({
           map: map,
+          id: fruitType,
           icon: fruitIcon,
           animation: google.maps.Animation.DROP,
           position: myLatLng
         });
+
+        markerArray.push(marker);
+
+        let infoWindow = new google.maps.InfoWindow({
+        content: content
+        });
+
+        google.maps.event.addListener(marker, 'click', () => {
+          infoWindow.open(this.map, marker);
+        });
+
       })
     })
+    this.markers = markerArray;
+  }
+
+  clearMarkers() {
+    for (var i = 0; i < this.markers.length; i++ ) {
+      this.markers[i].setMap(null);
+    }
+    this.markers.length = 0;
   }
 
   logout(){
-    // this.authData.logoutUser();
-    // this.navCtrl.setRoot(LoginPage);
+    this.authData.logoutUser();
+    this.navCtrl.setRoot(LoginPage);
   }
 
   /*
@@ -148,32 +182,32 @@ export class MapPage {
 
 export class HomePage {
 constructor(http: Http) {
-this.messages = [];
-this.socketHost = "http://192.168.57.1:3000";
-this.zone = new NgZone({enableLongStackTrace: false});
-http.get(this.socketHost + "/fetch").subscribe((success) => {
-var data = success.json();
-for(var i = 0; i < data.length; i++) {
-this.messages.push(data[i].message);
-}
-}, (error) => {
-console.log(JSON.stringify(error));
-});
-this.chatBox = "";
-this.socket = io(this.socketHost);
-this.socket.on("chat_message", (msg) => {
-this.zone.run(() => {
-this.messages.push(msg);
-});
-});
+  this.messages = [];
+  this.socketHost = "http://192.168.57.1:3000";
+  this.zone = new NgZone({enableLongStackTrace: false});
+  http.get(this.socketHost + "/fetch").subscribe((success) => {
+    var data = success.json();
+    for(var i = 0; i < data.length; i++) {
+    this.messages.push(data[i].message);
+  }
+  }, (error) => {
+    console.log(JSON.stringify(error));
+  });
+    this.chatBox = "";
+    this.socket = io(this.socketHost);
+    this.socket.on("chat_message", (msg) => {
+      this.zone.run(() => {
+        this.messages.push(msg);
+      });
+    });
 }
 
 send(message) {
-if(message && message != "") {
-this.socket.emit("chat_message", message);
-}
-this.chatBox = "";
-}
+  if(message && message != "") {
+    this.socket.emit("chat_message", message);
+  }
+    this.chatBox = "";
+  }
 } */
 
 }
